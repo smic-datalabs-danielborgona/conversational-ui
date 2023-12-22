@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import { Grid, Typography} from '@mui/material'
+import Display from './components/Display';
+import Chatbot from './components/ChatBot';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default function App() {
+  return <>
+      <Grid xs={12}>
+        <Grid container>
+          <Grid item xs={12} md={6} lg={8} sx={{ height:'100vh',display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor:'#e2ecf3'}}>
+            <Display />
+          </Grid>
+          
+          <Grid item xs={12} md={6} lg={4}>
+            <Chatbot />
+          </Grid>
+        </Grid>
+      </Grid>
+    </>
 }
 
-export default App;
+
