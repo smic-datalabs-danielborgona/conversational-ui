@@ -2,6 +2,7 @@ import {Box, TextField, Button, IconButton, Typography} from '@mui/material'
 import React, {useRef, useState} from 'react';
 import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
 import UploadFileOutlinedIcon from '@mui/icons-material/UploadFileOutlined';
+import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 // import CsvViewer from "react-csv-viewer";
 
 
@@ -23,15 +24,19 @@ export default function Input() {
 
         setFileName(selectedFile.name);
 
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            setFilePreview(e.target.result);
-        };
+        // const reader = new FileReader();
+        // reader.onload = (e) => {
+        //     setFilePreview(e.target.result);
+        // };
 
-        if (selectedFile) {
-            reader.readAsDataURL(selectedFile);
-        }
+        // if (selectedFile) {
+        //     reader.readAsDataURL(selectedFile);
+        // }
     };
+
+    const handleRemoveFile = () => {
+      setFileName('')
+    }
 
     // const llm = GoogleVertexAI(project_id="geometric-gamma-405402",
     //                      location="us-central1",
@@ -61,6 +66,9 @@ export default function Input() {
                       {fileName}
                   </Typography>
 
+                  <IconButton onClick={handleRemoveFile}>
+                    <ClearOutlinedIcon />
+                  </IconButton>
                 </Box>
             )}
 
@@ -71,15 +79,16 @@ export default function Input() {
                 onChange={handleFileChange}
             />
 
-            <IconButton
+            {!fileName && <IconButton
                 sx={{ backgroundColor: '#F4F4FC', marginRight: 1, borderRadius: '50%', height: '40px', width: '40px', my: 1 }}
                 onClick={handleUploadButtonClick}
             >
                 <UploadFileOutlinedIcon sx={{ color: 'black' }} />
             </IconButton>
+            }
           </>
 
-          <Button variant="contained" endIcon={<SendOutlinedIcon  />} 
+          <Button size='small' variant="contained" endIcon={<SendOutlinedIcon  />} 
                   sx={{ 
                       color: 'black',
                       textTransform:'none', 
