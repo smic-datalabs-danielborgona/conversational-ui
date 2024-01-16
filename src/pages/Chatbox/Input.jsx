@@ -11,7 +11,7 @@ export default function Input() {
 
     const fileInputRef = useRef(null);
     const [fileName, setFileName] = useState('');
-    const [filePreview, setFilePreview] = useState(null);
+    // const [filePreview, setFilePreview] = useState(null);
 
     const handleUploadButtonClick = () => {
         // Trigger click event on the hidden file input
@@ -75,6 +75,7 @@ export default function Input() {
             <input
                 type="file"
                 ref={fileInputRef}
+                accept=".csv"
                 style={{display:'none'}}
                 onChange={handleFileChange}
             />

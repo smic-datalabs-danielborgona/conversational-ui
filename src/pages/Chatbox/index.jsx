@@ -35,7 +35,7 @@ export default function ChatUI(){
 
     return (
         <>
-            <Grid container>
+            <Grid container mt={5}>
                 <Grid xs={12} mt={4} display={'flex'} justifyContent={'center'}>
                     <img src={datastrixLogo} alt="Datastrix Logo"  />
                 </Grid>

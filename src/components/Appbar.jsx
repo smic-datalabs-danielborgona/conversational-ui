@@ -12,11 +12,13 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import { Outlet, Link, useLocation} from "react-router-dom";
 
 
 
 export default function NavBar(props) {
-
+    const location = useLocation()
+    
     const drawerWidth = 240;
     const navItems = ['Home', 'User Policy', 'Documentation'];
 
@@ -36,8 +38,11 @@ export default function NavBar(props) {
         <List>
             {navItems.map((item) => (
             <ListItem key={item} disablePadding>
-                <ListItemButton sx={{ textAlign: 'center' }}>
-                <ListItemText primary={item} />
+                <ListItemButton sx={{ textAlign: 'center',  fontWeight: `/${item.toLowerCase().replace(/\s/g,'')}` === location.pathname ? 'bold': 'regular',}}>
+                    <Link to={ `/${item.toLowerCase().replace(/\s/g,'')}`} style={{ textDecoration: 'none', color: 'inherit',  
+                    borderBottom: `/${item.toLowerCase().replace(/\s/g,'')}` === location.pathname ? '4px solid #1976d2' : 'none'}}>
+                        <ListItemText primary={item} sx={{ fontWeight: `/${item.toLowerCase().replace(/\s/g,'')}` === location.pathname ? 'bold': 'regular',}}/>
+                    </Link>
                 </ListItemButton>
             </ListItem>
             ))}
@@ -62,16 +67,21 @@ export default function NavBar(props) {
                 
                 <Box sx={{ display: { xs: 'none', sm: 'block' }, marginLeft:'auto'}}>
                     {navItems.map((item,index) => (
-                    <Button key={item} disableTouchRipple disableRipple sx={{ 
+                    <Button key={item} component={Link}
+                        to={`/${item.toLowerCase().replace(/\s/g, '')}`}
+                        disableTouchRipple 
+                        disableRipple 
+                        sx={{ 
                         color: 'black', 
                         fontFamily:'Henry Sans',
                         marginRight: index < navItems.length - 1 ? '1rem' : '0', 
                         fontSize: '18px',
                         textTransform:'none',
-                        fontWeight: item === 'Home' ? 'bold': 'regular',
-                        borderBottom: item === 'Home' ? '4px solid #1976d2' : 'none',
+                        fontWeight: `/${item.toLowerCase().replace(/\s/g,'')}` === location.pathname ? 'bold': 'regular',
+                        borderBottom: `/${item.toLowerCase().replace(/\s/g,'')}` === location.pathname ? '4px solid #1976d2' : 'none',
                         borderRadius:'0px',
                         backgroundColor:'transparent',
+                        transition: 'border-bottom 0.1s ease-in-out',
                         "&:hover": {
                             backgroundColor: "transparent"
                         }}}
@@ -100,6 +110,6 @@ export default function NavBar(props) {
             {drawer}
             </Drawer>
       </nav>
-      
+      <Outlet />
     </>
 } 
